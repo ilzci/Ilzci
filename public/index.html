@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#050b14"
+    >
+
+    <meta
+        name="color-scheme"
+        content="dark"
+    >
+
+    <title>المتجر الليبي</title>
+
+    <!-- Telegram -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           LIBYAN STORE — MODERN UI
+        ===================================================== */
+
+        :root {
+
+            --bg: #040810;
+            --bg-2: #07111e;
+
+            --panel: rgba(10, 23, 39, .78);
+            --panel-solid: #0a1727;
+
+            --panel-light: rgba(16, 35, 57, .72);
+
+            --blue: #238bea;
+            --blue-light: #4aa9ff;
+
+            --gold: #f4b83f;
+            --gold-light: #ffd96f;
+
+            --green: #55e69a;
+            --red: #ff6262;
+
+            --text: #f4f8fc;
+            --text-soft: #c4d0dc;
+            --muted: #7f92a8;
+            --muted-2: #53677d;
+
+            --border: rgba(133, 181, 226, .12);
+            --border-strong: rgba(133, 181, 226, .20);
+            --border-gold: rgba(244, 184, 63, .26);
+
+            --radius-xl: 25px;
+            --radius-lg: 19px;
+            --radius-md: 14px;
+
+            --shadow:
+                0 25px 70px rgba(0, 0, 0, .38);
+
+            --shadow-soft:
+                0 12px 35px rgba(0, 0, 0, .22);
+        }
+
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        html {
+            min-height: 100%;
+
+            background: var(--bg);
+
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            overflow-x: hidden;
+
+            color: var(--text);
+
+            font-family:
+                "Cairo",
+                system-ui,
+                sans-serif;
+
+            background:
+
+                radial-gradient(
+                    650px 380px at 95% -10%,
+                    rgba(35, 139, 234, .17),
+                    transparent 65%
+                ),
+
+                radial-gradient(
+                    500px 300px at -10% 55%,
+                    rgba(244, 184, 63, .055),
+                    transparent 65%
+                ),
+
+                linear-gradient(
+                    145deg,
+                    #03070e 0%,
+                    #06111d 48%,
+                    #071525 100%
+                );
+        }
+
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: -1;
+
+            pointer-events: none;
+
+            opacity: .32;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.018) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.018) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                38px 38px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 80%
+                );
+        }
+
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+
+        button {
+            border: 0;
+            cursor: pointer;
+        }
+
+
+        img {
+            max-width: 100%;
+        }
+
+
+        ::selection {
+            color: #06101c;
+            background: var(--gold);
+        }
+
+
+        /* =====================================================
+           APP
+        ===================================================== */
+
+        .app {
+
+            width: 100%;
+
+            max-width: 1320px;
+
+            margin: 0 auto;
+
+            padding:
+
+                max(12px, env(safe-area-inset-top))
+
+                18px
+
+                max(32px, env(safe-area-inset-bottom));
+        }
+
+
+        /* =====================================================
+           TOP BAR
+        ===================================================== */
+
+        .topbar {
+
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                auto
+                auto;
+
+            align-items: center;
+
+            gap: 13px;
+
+            min-height: 82px;
+
+            padding: 11px 12px;
+
+            overflow: hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius-xl);
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(13, 31, 51, .88),
+                    rgba(5, 13, 24, .94)
+                );
+
+            box-shadow:
+                var(--shadow);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+        }
+
+
+        .topbar::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: 14%;
+
+            right: 14%;
+
+            height: 1px;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(244,184,63,.85),
+                    rgba(74,169,255,.45),
+                    transparent
+                );
+        }
+
+
+        .topbar::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 340px;
+
+            height: 340px;
+
+            top: -260px;
+
+            right: -120px;
+
+            border-radius: 50%;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(35,139,234,.16),
+                    transparent 68%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           BRAND
+        ===================================================== */
+
+        .brand-area {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            min-width: 0;
+        }
+
+
+        .brand-logo {
+
+            width: 52px;
+
+            height: 52px;
+
+            flex: 0 0 52px;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 16px;
+
+            border:
+                1px solid var(--border-gold);
+
+            background:
+                #071321;
+
+            box-shadow:
+
+                0 0 0 4px
+                rgba(244,184,63,.035),
+
+                0 10px 28px
+                rgba(0,0,0,.28);
+        }
+
+
+        .brand-info {
+            min-width: 0;
+        }
+
+
+        .brand {
+
+            color: #fff;
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            line-height: 1.2;
+
+            white-space: nowrap;
+        }
+
+
+        .brand span:last-child {
+            color: var(--gold);
+        }
+
+
+        .brand-subtitle {
+
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            direction: ltr;
+        }
+
+
+        .welcome {
+
+            margin-top: 4px;
+
+            color: var(--muted-2);
+
+            font-size: 9px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        /* =====================================================
+           USER
+        ===================================================== */
+
+        .user-profile {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            min-width: 180px;
+
+            padding: 7px 10px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 16px;
+
+            background:
+                rgba(0, 8, 17, .34);
+
+            transition:
+                border-color .2s ease,
+                background .2s ease;
+        }
+
+
+        .user-profile:hover {
+
+            border-color:
+                var(--border-strong);
+
+            background:
+                rgba(0, 8, 17, .48);
+        }
+
+
+        .user-avatar-wrap {
+
+            position: relative;
+
+            width: 42px;
+
+            height: 42px;
+
+            flex: 0 0 42px;
+        }
+
+
+        .user-avatar {
+
+            width: 42px;
+
+            height: 42px;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 50%;
+
+            border:
+                2px solid var(--gold);
+
+            background:
+                #10243a;
+
+            box-shadow:
+
+                0 0 0 3px
+                rgba(244,184,63,.05);
+        }
+
+
+        .online-dot {
+
+            position: absolute;
+
+            left: -1px;
+
+            bottom: 0;
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            border:
+                2px solid #081421;
+
+            box-shadow:
+                0 0 10px
+                rgba(85,230,154,.35);
+        }
+
+
+        .user-details {
+            min-width: 0;
+        }
+
+
+        .user-name {
+
+            max-width: 160px;
+
+            color: #fff;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .user-id {
+
+            margin-top: 3px;
+
+            color: var(--muted-2);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 8px;
+
+            direction: ltr;
+        }
+
+
+        /* =====================================================
+           BALANCE
+        ===================================================== */
+
+        .balance {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            min-width: 145px;
+
+            padding: 8px 11px;
+
+            border:
+                1px solid var(--border-gold);
+
+            border-radius: 16px;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    rgba(244,184,63,.10),
+                    rgba(244,184,63,.025)
+                ),
+
+                rgba(0,8,16,.22);
+
+            box-shadow:
+                inset 0 1px 0
+                rgba(255,255,255,.025);
+        }
+
+
+        .balance-icon {
+
+            width: 35px;
+
+            height: 35px;
+
+            flex: 0 0 35px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 11px;
+
+            color: var(--gold-light);
+
+            background:
+                rgba(244,184,63,.09);
+
+            border:
+                1px solid
+                rgba(244,184,63,.16);
+
+            font-size: 15px;
+        }
+
+
+        .balance small {
+
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 8px;
+
+            font-weight: 700;
+        }
+
+
+        .balance strong {
+
+            display: block;
+
+            margin-top: 1px;
+
+            color: var(--gold-light);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            line-height: 1.2;
+
+            direction: ltr;
+        }
+
+
+        /* =====================================================
+           STORE HERO
+        ===================================================== */
+
+        .store-header {
+
+            position: relative;
+
+            margin-top: 22px;
+
+            min-height: 185px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 31px 30px;
+
+            overflow: hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius-xl);
+
+            background:
+
+                linear-gradient(
+                    110deg,
+                    rgba(9,26,44,.94),
+                    rgba(5,14,25,.78)
+                );
+
+            box-shadow:
+                var(--shadow-soft);
+        }
+
+
+        .store-header::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+
+            height: 420px;
+
+            top: -280px;
+
+            right: -100px;
+
+            border-radius: 50%;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(35,139,234,.18),
+                    transparent 68%
+                );
+        }
+
+
+        .store-header::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -100px;
+
+            bottom: -220px;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            background:
+
+                radial-gradient(
+                    circle,
+                    rgba(244,184,63,.07),
+                    transparent 68%
+                );
+        }
+
+
+        .store-heading {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 700px;
+        }
+
+
+        .store-eyebrow {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: var(--gold);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            direction: ltr;
+        }
+
+
+        .store-eyebrow::before {
+
+            content: "";
+
+            width: 27px;
+
+            height: 2px;
+
+            border-radius: 99px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--gold),
+                    transparent
+                );
+        }
+
+
+        .store-title {
+
+            margin-top: 8px;
+
+            color: #fff;
+
+            font-size:
+                clamp(28px, 5vw, 43px);
+
+            font-weight: 900;
+
+            line-height: 1.2;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .store-title span {
+
+            color: var(--gold);
+
+            text-shadow:
+                0 0 35px
+                rgba(244,184,63,.12);
+        }
+
+
+        .store-caption {
+
+            max-width: 620px;
+
+            margin-top: 9px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.9;
+        }
+
+
+        /* =====================================================
+           SECTION HEADER
+        ===================================================== */
+
+        .products-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: 27px;
+
+            margin-bottom: 13px;
+
+            padding: 0 4px;
+        }
+
+
+        .products-heading-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .products-heading-marker {
+
+            width: 4px;
+
+            height: 22px;
+
+            border-radius: 99px;
+
+            background:
+
+                linear-gradient(
+                    180deg,
+                    var(--gold-light),
+                    var(--gold)
+                );
+
+            box-shadow:
+                0 0 16px
+                rgba(244,184,63,.18);
+        }
+
+
+        .products-heading h2 {
+
+            color: #fff;
+
+            font-size: 18px;
+
+            font-weight: 900;
+        }
+
+
+        .products-count {
+
+            min-width: 37px;
+
+            padding: 5px 10px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,.025);
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           PRODUCTS
+        ===================================================== */
+
+        .products {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(235px, 1fr)
+                );
+
+            gap: 16px;
+        }
+
+
+        /* =====================================================
+           PRODUCT CARD
+        ===================================================== */
+
+        .product-card {
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-width: 0;
+
+            overflow: hidden;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius-lg);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    rgba(11,30,50,.97),
+                    rgba(4,12,22,.99)
+                );
+
+            box-shadow:
+                0 13px 40px
+                rgba(0,0,0,.20);
+
+            transition:
+                transform .22s ease,
+                border-color .22s ease,
+                box-shadow .22s ease;
+        }
+
+
+        .product-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            z-index: 3;
+
+            top: 0;
+
+            left: 15%;
+
+            right: 15%;
+
+            height: 1px;
+
+            opacity: .65;
+
+            background:
+
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(244,184,63,.5),
+                    transparent
+                );
+
+            pointer-events: none;
+        }
+
+
+        .product-card:hover {
+
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(244,184,63,.27);
+
+            box-shadow:
+                0 24px 55px
+                rgba(0,0,0,.34);
+        }
+
+
+        .product-image {
+
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio: 16 / 10;
+
+            overflow: hidden;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #0b2239,
+                    #06111f
+                );
+        }
+
+
+        .product-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            transition:
+                transform .35s ease;
+        }
+
+
+        .product-card:hover
+        .product-image img {
+
+            transform:
+                scale(1.055);
+        }
+
+
+        .product-image::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+
+                linear-gradient(
+                    180deg,
+                    transparent 42%,
+                    rgba(0,0,0,.34)
+                );
+
+            pointer-events: none;
+        }
+
+
+        .product-content {
+
+            display: flex;
+
+            flex-direction: column;
+
+            flex: 1;
+
+            padding: 14px;
+        }
+
+
+        .product-name {
+
+            color: #fff;
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            line-height: 1.5;
+        }
+
+
+        .product-description {
+
+            min-height: 35px;
+
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            display: -webkit-box;
+
+            -webkit-line-clamp: 2;
+
+            -webkit-box-orient: vertical;
+
+            overflow: hidden;
+        }
+
+
+        .product-footer {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 8px;
+
+            margin-top: 14px;
+        }
+
+
+        .product-price {
+
+            color: var(--gold-light);
+
+            font-family: Arial, sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            direction: ltr;
+
+            white-space: nowrap;
+        }
+
+
+        .buy-button {
+
+            min-height: 37px;
+
+            padding:
+                6px 16px;
+
+            border:
+                1px solid
+                rgba(244,184,63,.25);
+
+            border-radius: 11px;
+
+            color: #06101b;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #ffdc76,
+                    #f4b83f
+                );
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 8px 22px
+                rgba(244,184,63,.09);
+
+            transition:
+                transform .16s ease,
+                filter .16s ease;
+        }
+
+
+        .buy-button:hover {
+
+            filter:
+                brightness(1.06);
+        }
+
+
+        .buy-button:active {
+
+            transform:
+                scale(.95);
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            grid-column: 1 / -1;
+
+            padding: 70px 20px;
+
+            text-align: center;
+
+            border:
+                1px dashed var(--border-strong);
+
+            border-radius:
+                var(--radius-lg);
+
+            background:
+                rgba(255,255,255,.012);
+        }
+
+
+        .empty-state-icon {
+
+            margin-bottom: 10px;
+
+            font-size: 28px;
+
+            opacity: .75;
+        }
+
+
+        .empty-state h3 {
+
+            color: #fff;
+
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+
+        .empty-state p {
+
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 1000;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 15px;
+
+            background:
+                rgba(0,4,10,.80);
+
+            backdrop-filter:
+                blur(15px);
+
+            -webkit-backdrop-filter:
+                blur(15px);
+        }
+
+
+        .modal.active,
+        .modal.show {
+
+            display: flex;
+        }
+
+
+        .modal-box {
+
+            position: relative;
+
+            width:
+                min(100%, 470px);
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            padding: 26px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius-xl);
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    #0b1d31,
+                    #050e19
+                );
+
+            box-shadow:
+                0 35px 100px
+                rgba(0,0,0,.58);
+
+            animation:
+                modalIn .2s ease;
+        }
+
+
+        @keyframes modalIn {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(12px)
+                    scale(.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        .close {
+
+            position: absolute;
+
+            top: 11px;
+
+            left: 11px;
+
+            width: 34px;
+
+            height: 34px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 10px;
+
+            color: #9fb0c2;
+
+            background:
+                rgba(255,255,255,.04);
+
+            font-size: 20px;
+
+            transition: .16s ease;
+        }
+
+
+        .close:hover {
+
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.08);
+        }
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+
+            position: fixed;
+
+            z-index: 2000;
+
+            right: 50%;
+
+            bottom: 22px;
+
+            max-width:
+                calc(100% - 28px);
+
+            padding:
+                11px 16px;
+
+            border:
+                1px solid var(--border-gold);
+
+            border-radius: 13px;
+
+            color: var(--text);
+
+            background:
+                rgba(6,18,32,.97);
+
+            font-size: 10px;
+
+            box-shadow:
+                0 16px 45px
+                rgba(0,0,0,.42);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform:
+                translateX(50%)
+                translateY(15px);
+
+            transition: .23s ease;
+        }
+
+
+        .toast.show {
+
+            opacity: 1;
+
+            transform:
+                translateX(50%)
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           DESKTOP
+        ===================================================== */
+
+        @media (min-width: 1000px) {
+
+            .app {
+
+                padding-left: 22px;
+
+                padding-right: 22px;
+            }
+
+
+            .topbar {
+
+                min-height: 86px;
+            }
+
+
+            .products {
+
+                grid-template-columns:
+                    repeat(4, minmax(0, 1fr));
+            }
+
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .topbar {
+
+                grid-template-columns:
+                    1fr auto;
+            }
+
+
+            .user-profile {
+
+                grid-column:
+                    1 / -1;
+
+                width: 100%;
+            }
+
+
+            .user-details {
+
+                flex: 1;
+            }
+
+
+            .user-name {
+
+                max-width: none;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .app {
+
+                padding-left: 9px;
+
+                padding-right: 9px;
+            }
+
+
+            .topbar {
+
+                gap: 9px;
+
+                padding: 10px;
+
+                border-radius: 20px;
+            }
+
+
+            .brand-logo {
+
+                width: 44px;
+
+                height: 44px;
+
+                flex-basis: 44px;
+
+                border-radius: 13px;
+            }
+
+
+            .brand {
+
+                font-size: 14px;
+            }
+
+
+            .brand-subtitle {
+
+                display: none;
+            }
+
+
+            .welcome {
+
+                font-size: 8px;
+            }
+
+
+            .balance {
+
+                min-width: 108px;
+
+                padding: 7px 8px;
+            }
+
+
+            .balance-icon {
+
+                width: 30px;
+
+                height: 30px;
+
+                flex-basis: 30px;
+            }
+
+
+            .balance strong {
+
+                font-size: 14px;
+            }
+
+
+            .store-header {
+
+                min-height: 165px;
+
+                margin-top: 15px;
+
+                padding:
+                    25px 20px;
+
+                border-radius: 21px;
+            }
+
+
+            .store-title {
+
+                font-size: 25px;
+            }
+
+
+            .store-caption {
+
+                font-size: 10px;
+
+                line-height: 1.8;
+            }
+
+
+            .products-heading {
+
+                margin-top: 22px;
+            }
+
+
+            .products {
+
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+
+                gap: 9px;
+            }
+
+
+            .product-card {
+
+                border-radius: 15px;
+            }
+
+
+            .product-content {
+
+                padding: 10px;
+            }
+
+
+            .product-name {
+
+                font-size: 12px;
+            }
+
+
+            .product-description {
+
+                min-height: 32px;
+
+                font-size: 9px;
+            }
+
+
+            .product-footer {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 7px;
+
+                margin-top: 10px;
+            }
+
+
+            .product-price {
+
+                font-size: 12px;
+            }
+
+
+            .buy-button {
+
+                width: 100%;
+
+                min-height: 34px;
+            }
+
+        }
+
+
+        /* =====================================================
+           VERY SMALL MOBILE
+        ===================================================== */
+
+        @media (max-width: 390px) {
+
+            .topbar {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .balance {
+
+                width: 100%;
+            }
+
+
+            .products {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .product-footer {
+
+                flex-direction: row;
+
+                align-items: center;
+            }
+
+
+            .buy-button {
+
+                width: auto;
+            }
+
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation: none !important;
+
+                transition: none !important;
+
+                scroll-behavior: auto !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ===================================================== -->
+
+    <header class="topbar">
+
+
+        <!-- BRAND -->
+
+        <div class="brand-area">
+
+            <img
+                class="brand-logo"
+                src="https://i.imgur.com/Z8xh0Af.png"
+                alt="المتجر الليبي"
+            >
+
+
+            <div class="brand-info">
+
+                <div class="brand">
+
+                    <span>
+                        المتجر
+                    </span>
+
+                    <span>
+                        الليبي
+                    </span>
+
+                </div>
+
+
+                <div class="brand-subtitle">
+                    LIBYAN STORE
+                </div>
+
+
+                <div
+                    class="welcome"
+                    id="welcome"
+                >
+                    جاري تحميل الحساب...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- USER -->
+
+        <div class="user-profile">
+
+            <div class="user-avatar-wrap">
+
+                <img
+                    id="userAvatar"
+                    class="user-avatar"
+                    src="https://i.imgur.com/Z8xh0Af.png"
+                    alt="المستخدم"
+                >
+
+                <span
+                    class="online-dot"
+                ></span>
+
+            </div>
+
+
+            <div class="user-details">
+
+                <div
+                    class="user-name"
+                    id="userName"
+                >
+                    جاري التحميل...
+                </div>
+
+
+                <div
+                    class="user-id"
+                    id="userId"
+                >
+                    ID: ------
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BALANCE -->
+
+        <div class="balance">
+
+            <div class="balance-icon">
+                ⭐
+            </div>
+
+
+            <div>
+
+                <small>
+                    الرصيد
+                </small>
+
+
+                <strong id="balance">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         STORE HERO
+    ===================================================== -->
+
+    <main>
+
+        <section class="store-header">
+
+            <div class="store-heading">
+
+                <div class="store-eyebrow">
+                    LIBYAN STORE
+                </div>
+
+
+                <h1 class="store-title">
+                    المتجر
+                    <span>الليبي</span>
+                </h1>
+
+
+                <p class="store-caption">
+                    كل خدماتك الرقمية في مكان واحد،
+                    اطلب ما تحتاجه مباشرة باستخدام رصيدك.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PRODUCTS HEADER
+        ================================================= -->
+
+        <div class="products-heading">
+
+            <div class="products-heading-left">
+
+                <span
+                    class="products-heading-marker"
+                ></span>
+
+
+                <h2>
+                    المنتجات
+                </h2>
+
+            </div>
+
+
+            <span
+                class="products-count"
+                id="productsCount"
+            >
+                0
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             PRODUCTS
+        ================================================= -->
+
+        <div
+            class="products"
+            id="products"
+        ></div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     MODAL
+========================================================= -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-box">
+
+        <button
+            class="close"
+            type="button"
+            onclick="closeModal()"
+            aria-label="إغلاق"
+        >
+            ×
+        </button>
+
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<!-- =========================================================
+     TELEGRAM SETUP
+========================================================= -->
+
+<script>
+
+    const telegramWebApp =
+        window.Telegram?.WebApp || null;
+
+
+    if (telegramWebApp) {
+
+        telegramWebApp.ready();
+
+        telegramWebApp.expand();
+
+
+        try {
+
+            telegramWebApp.setHeaderColor(
+                "#07111e"
+            );
+
+            telegramWebApp.setBackgroundColor(
+                "#040810"
+            );
+
+        } catch (error) {
+
+            console.log(
+                "Telegram theme setup skipped"
+            );
+
+        }
+
+
+        const telegramUser =
+            telegramWebApp.initDataUnsafe?.user;
+
+
+        if (telegramUser) {
+
+            const avatar =
+                document.getElementById(
+                    "userAvatar"
+                );
+
+
+            const userName =
+                document.getElementById(
+                    "userName"
+                );
+
+
+            const userId =
+                document.getElementById(
+                    "userId"
+                );
+
+
+            const welcome =
+                document.getElementById(
+                    "welcome"
+                );
+
+
+            if (
+                telegramUser.photo_url &&
+                avatar
+            ) {
+
+                avatar.src =
+                    telegramUser.photo_url;
+
+            }
+
+
+            const fullName = [
+
+                telegramUser.first_name || "",
+
+                telegramUser.last_name || ""
+
+            ]
+            .join(" ")
+            .trim();
+
+
+            if (userName) {
+
+                userName.textContent =
+                    fullName ||
+                    telegramUser.username ||
+                    "مستخدم Telegram";
+
+            }
+
+
+            if (userId) {
+
+                userId.textContent =
+                    `ID: ${telegramUser.id}`;
+
+            }
+
+
+            if (welcome) {
+
+                welcome.textContent =
+                    telegramUser.username
+                        ? `@${telegramUser.username}`
+                        : "حساب Telegram";
+
+            }
+
+        } else {
+
+            const userName =
+                document.getElementById(
+                    "userName"
+                );
+
+
+            const userId =
+                document.getElementById(
+                    "userId"
+                );
+
+
+            const welcome =
+                document.getElementById(
+                    "welcome"
+                );
+
+
+            if (userName) {
+
+                userName.textContent =
+                    "افتح المتجر من Telegram";
+
+            }
+
+
+            if (userId) {
+
+                userId.textContent =
+                    "Telegram Web App";
+
+            }
+
+
+            if (welcome) {
+
+                welcome.textContent =
+                    "افتح المتجر من Telegram";
+
+            }
+
+        }
+
+    }
+
+</script>
+
+
+<!-- =========================================================
+     APP JS
+========================================================= -->
+
+<script src="/app.js?v=10"></script>
+
+
+</body>
+
+</html>

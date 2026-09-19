@@ -1,0 +1,3465 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#050914">
+    <meta name="color-scheme" content="dark">
+
+    <title>المتجر الليبي</title>
+
+    <style>
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+            --ink: #edf7ff;
+            --muted: #8da0b6;
+            --faint: #52657a;
+
+            --void: #050914;
+            --deep: #07101e;
+
+            --surface: rgba(12, 26, 45, .78);
+            --surface-strong: rgba(14, 34, 58, .92);
+
+            --line: rgba(143, 206, 255, .15);
+            --line-hot: rgba(56, 193, 255, .56);
+
+            --cyan: #58d8ff;
+            --electric: #2877ff;
+            --gold: #f5c86e;
+
+            --green: #64e5a7;
+            --red: #ff8796;
+            --orange: #ffad66;
+
+            --safe: max(14px, env(safe-area-inset-bottom));
+
+            --radius: 24px;
+        }
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            background: var(--void);
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            margin: 0;
+            overflow-x: hidden;
+
+            color: var(--ink);
+
+            background:
+                radial-gradient(
+                    circle at 88% 3%,
+                    rgba(39, 113, 255, .25),
+                    transparent 28rem
+                ),
+                radial-gradient(
+                    circle at 4% 32%,
+                    rgba(0, 216, 255, .13),
+                    transparent 24rem
+                ),
+                radial-gradient(
+                    circle at 48% 104%,
+                    rgba(245, 200, 110, .10),
+                    transparent 32rem
+                ),
+                linear-gradient(
+                    145deg,
+                    #081426 0%,
+                    #050914 51%,
+                    #07101d 100%
+                );
+
+            font-family:
+                Cairo,
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+            outline: none;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid rgba(88, 216, 255, .74);
+            outline-offset: 3px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        svg {
+            display: block;
+        }
+
+        .sr-only {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+
+        /* =========================================================
+           APP
+        ========================================================= */
+
+        .app-shell {
+            position: relative;
+            isolation: isolate;
+
+            width: 100%;
+            max-width: 1080px;
+
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            margin: 0 auto;
+
+            padding:
+                max(18px, env(safe-area-inset-top))
+                clamp(14px, 3vw, 30px)
+                calc(122px + var(--safe));
+        }
+
+        .app-shell::before,
+        .app-shell::after {
+            content: "";
+
+            position: fixed;
+            z-index: -1;
+
+            width: 17rem;
+            height: 17rem;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(75px);
+
+            opacity: .42;
+        }
+
+        .app-shell::before {
+            top: 11rem;
+            right: -12rem;
+            background: #0e70ff;
+        }
+
+        .app-shell::after {
+            bottom: 2rem;
+            left: -12rem;
+            background: #00bedf;
+        }
+
+
+        /* =========================================================
+           TOPBAR
+        ========================================================= */
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 13px;
+
+            margin-bottom: 20px;
+
+            animation: enter .55s ease both;
+        }
+
+        .brand-block {
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+
+            min-width: 0;
+        }
+
+        .brand-mark {
+            width: 49px;
+            height: 49px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 49px;
+
+            color: #061222;
+
+            border: 1px solid rgba(185, 242, 255, .6);
+
+            border-radius:
+                17px
+                17px
+                6px
+                17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78e5ff,
+                    #2779ff
+                );
+
+            box-shadow:
+                0 10px 30px rgba(34, 122, 255, .34),
+                inset 0 1px rgba(255,255,255,.5);
+        }
+
+        .brand-mark svg {
+            width: 24px;
+            height: 24px;
+
+            stroke-width: 2.5;
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-name {
+            display: block;
+
+            color: #edf7ff;
+
+            font-size: 17px;
+            font-weight: 900;
+
+            letter-spacing: -.04em;
+        }
+
+        .store-status {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            flex: 0 0 7px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 0 4px rgba(100,229,167,.11),
+                0 0 12px var(--green);
+        }
+
+
+        /* =========================================================
+           BALANCE
+        ========================================================= */
+
+        .balance-chip {
+            min-height: 56px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                7px
+                10px
+                7px
+                8px;
+
+            border: 1px solid rgba(89, 210, 255, .28);
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(22, 67, 112, .75),
+                    rgba(11, 23, 41, .84)
+                );
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,.22),
+                inset 0 1px rgba(255,255,255,.08);
+        }
+
+        .balance-icon {
+            width: 37px;
+            height: 37px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 37px;
+
+            color: var(--gold);
+
+            border: 1px solid rgba(245,200,110,.24);
+
+            border-radius: 12px;
+
+            background: rgba(245,200,110,.10);
+        }
+
+        .balance-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .balance-label {
+            display: block;
+
+            color: var(--muted);
+
+            font-size: 10px;
+            line-height: 1;
+        }
+
+        #balanceValue {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 900;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            position: relative;
+
+            min-height: 258px;
+
+            overflow: hidden;
+
+            margin-bottom: 25px;
+
+            padding:
+                clamp(25px, 5vw, 43px);
+
+            border:
+                1px solid
+                rgba(105, 198, 255, .22);
+
+            border-radius:
+                30px
+                30px
+                30px
+                7px;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    rgba(13, 45, 78, .94),
+                    rgba(6, 18, 35, .91) 55%,
+                    rgba(18, 40, 89, .86)
+                ),
+                #0a1a2f;
+
+            box-shadow:
+                0 22px 52px rgba(0,0,0,.29),
+                inset 0 1px rgba(255,255,255,.09);
+
+            animation:
+                enter .6s .08s ease both;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            left: -90px;
+            bottom: -130px;
+
+            border:
+                1px solid
+                rgba(88,216,255,.38);
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 0 23px rgba(88,216,255,.04),
+                0 0 0 55px rgba(40,119,255,.06);
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            inset:
+                18px
+                19px
+                auto
+                auto;
+
+            width: 78px;
+            height: 78px;
+
+            border-top:
+                2px solid
+                rgba(245,200,110,.64);
+
+            border-right:
+                2px solid
+                rgba(245,200,110,.64);
+
+            opacity: .75;
+
+            transform: rotate(45deg);
+        }
+
+        .eyebrow {
+            position: relative;
+            z-index: 1;
+
+            display: inline-flex;
+            align-items: center;
+
+            min-height: 28px;
+
+            padding:
+                4px
+                11px;
+
+            border:
+                1px solid
+                rgba(104,224,255,.34);
+
+            border-radius: 999px;
+
+            background:
+                rgba(63, 202, 255, .10);
+
+            color: #8ee9ff;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .hero h1 {
+            position: relative;
+            z-index: 1;
+
+            max-width: 640px;
+
+            margin:
+                15px
+                0
+                9px;
+
+            color: #fff;
+
+            font-size:
+                clamp(
+                    27px,
+                    5.5vw,
+                    43px
+                );
+
+            line-height: 1.26;
+
+            letter-spacing: -.055em;
+        }
+
+        .hero p {
+            position: relative;
+            z-index: 1;
+
+            max-width: 540px;
+
+            margin: 0;
+
+            color: #bfd0e2;
+
+            font-size: 13px;
+
+            line-height: 2;
+        }
+
+        .hero p::after {
+            content:
+                "دفع آمن • تسليم سريع • دعم مستمر";
+
+            display: block;
+
+            margin-top: 18px;
+
+            color: #8ee9ff;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: .04em;
+        }
+
+
+        /* =========================================================
+           VIEWS
+        ========================================================= */
+
+        .view {
+            display: none;
+
+            animation:
+                rise .35s ease both;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        #viewStore > .section-heading,
+        #viewStore > .search-wrap,
+        #viewStore > .filter-row {
+            display: none;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+
+            gap: 12px;
+
+            margin:
+                6px
+                2px
+                15px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+
+            color: var(--ink);
+
+            font-size: 20px;
+            font-weight: 900;
+
+            letter-spacing: -.035em;
+        }
+
+        .section-heading span {
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           SEARCH
+        ========================================================= */
+
+        .search-wrap {
+            position: relative;
+
+            margin-bottom: 12px;
+        }
+
+        .search-wrap > svg {
+            position: absolute;
+            z-index: 1;
+
+            top: 50%;
+            right: 17px;
+
+            width: 20px;
+            height: 20px;
+
+            color: #68dfff;
+
+            transform:
+                translateY(-50%);
+
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            height: 58px;
+
+            padding:
+                0
+                51px
+                0
+                17px;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 18px;
+
+            color: var(--ink);
+
+            background:
+                rgba(10, 26, 46, .8);
+
+            box-shadow:
+                inset 0 1px rgba(255,255,255,.045),
+                0 9px 22px rgba(0,0,0,.13);
+
+            transition: .2s ease;
+        }
+
+        .search-input::placeholder {
+            color: #6e8298;
+        }
+
+        .search-input:focus {
+            border-color: var(--line-hot);
+
+            background:
+                rgba(12, 35, 62, .96);
+
+            box-shadow:
+                0 0 0 4px rgba(49, 183, 255, .12),
+                0 14px 26px rgba(0,0,0,.18);
+        }
+
+
+        /* =========================================================
+           FILTERS
+        ========================================================= */
+
+        .filter-row {
+            display: flex;
+
+            gap: 8px;
+
+            overflow-x: auto;
+
+            padding:
+                3px
+                1px
+                13px;
+
+            scrollbar-width: none;
+        }
+
+        .filter-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            min-height: 42px;
+
+            flex: 0 0 auto;
+
+            padding:
+                0
+                16px;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 13px;
+
+            color: #a9bbce;
+
+            background:
+                rgba(14, 30, 50, .68);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                transform .16s ease,
+                border-color .16s ease,
+                color .16s ease,
+                background .16s ease;
+        }
+
+        .filter-btn:hover {
+            color: #fff;
+
+            border-color:
+                rgba(91,215,255,.52);
+        }
+
+        .filter-btn:active {
+            transform: scale(.96);
+        }
+
+        .filter-btn.active,
+        .filter-btn[aria-pressed="true"] {
+            color: #06101e;
+
+            border-color: #8ce9ff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78e6ff,
+                    #4c9cff
+                );
+
+            box-shadow:
+                0 9px 19px
+                rgba(31,135,255,.25);
+        }
+
+
+        /* =========================================================
+           PRODUCTS
+        ========================================================= */
+
+        #productsContainer {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    1,
+                    minmax(0, 1fr)
+                );
+
+            gap: 13px;
+        }
+
+        /*
+         * مهم:
+         * app.js ينشئ product-card بنفسه.
+         * لذلك هذه القواعد تعمل مباشرة على العناصر التي ينشئها.
+         */
+
+        #productsContainer > .product-card {
+            position: relative;
+
+            width: 100%;
+            min-width: 0;
+
+            min-height: 236px;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-right:
+                3px solid
+                rgba(87,214,255,.7);
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    140deg,
+                    rgba(17, 42, 70, .88),
+                    rgba(7, 18, 33, .94)
+                );
+
+            box-shadow:
+                0 13px 26px rgba(0,0,0,.17),
+                inset 0 1px rgba(255,255,255,.055);
+
+            transition:
+                transform .18s ease,
+                border-color .18s ease,
+                box-shadow .18s ease;
+        }
+
+        #productsContainer > .product-card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 70px;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--cyan)
+                );
+
+            opacity: .8;
+        }
+
+        #productsContainer > .product-card:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(91,215,255,.35);
+
+            box-shadow:
+                0 18px 32px rgba(0,0,0,.22),
+                0 0 0 1px rgba(88,216,255,.04);
+        }
+
+        .product-image {
+            position: relative;
+
+            width: 100%;
+
+            flex: 0 0 auto;
+
+            aspect-ratio: 16 / 10;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #102c4b,
+                    #081522
+                );
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+        }
+
+        .product-placeholder {
+            width: 100%;
+            height: 100%;
+
+            display: grid;
+            place-items: center;
+
+            color: rgba(113,226,255,.72);
+
+            background:
+                radial-gradient(
+                    circle at 50% 40%,
+                    rgba(55,190,255,.16),
+                    transparent 55%
+                ),
+                #09192c;
+        }
+
+        .product-placeholder svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .product-status {
+            position: absolute;
+
+            top: 9px;
+            right: 9px;
+
+            display: inline-flex;
+            align-items: center;
+
+            gap: 5px;
+
+            min-height: 27px;
+
+            padding:
+                4px
+                9px;
+
+            border:
+                1px solid
+                rgba(112,221,255,.27);
+
+            border-radius: 999px;
+
+            color: #c9f5ff;
+
+            background:
+                rgba(2, 17, 32, .72);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .product-status svg {
+            width: 13px;
+            height: 13px;
+        }
+
+        .product-status.auto {
+            color: #bdf7d9;
+
+            border-color:
+                rgba(100,229,167,.25);
+        }
+
+        .product-status.manual {
+            color: #ffe3a6;
+
+            border-color:
+                rgba(245,200,110,.25);
+        }
+
+        .product-body {
+            flex: 1 1 auto;
+
+            min-height: 0;
+
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            padding:
+                11px
+                11px
+                10px;
+        }
+
+        .product-name {
+            width: 100%;
+
+            margin: 0;
+
+            min-height:
+                calc(1.45em * 2);
+
+            max-height:
+                calc(1.45em * 2);
+
+            overflow: hidden;
+
+            color: #f4fbff;
+
+            font-size: 14px;
+            font-weight: 900;
+
+            line-height: 1.45;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .product-description {
+            width: 100%;
+
+            min-height:
+                calc(1.5em * 2);
+
+            max-height:
+                calc(1.5em * 2);
+
+            margin-top: 4px;
+
+            overflow: hidden;
+
+            color: #8fa7bb;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+
+        .product-footer {
+            width: 100%;
+
+            margin-top: auto;
+
+            padding-top: 9px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 8px;
+        }
+
+        .product-price {
+            color: var(--gold);
+
+            font-size: 15px;
+            font-weight: 900;
+
+            line-height: 1.2;
+        }
+
+        .buy-btn {
+            min-height: 39px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            padding:
+                0
+                12px;
+
+            border:
+                1px solid
+                rgba(104,224,255,.28);
+
+            border-radius: 12px;
+
+            color: #05111e;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78e7ff,
+                    #408bff
+                );
+
+            box-shadow:
+                0 8px 18px
+                rgba(30,119,255,.22);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                transform .15s ease,
+                filter .15s ease,
+                opacity .15s ease;
+        }
+
+        .buy-btn svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .buy-btn:hover {
+            filter: brightness(1.08);
+        }
+
+        .buy-btn:active {
+            transform: scale(.96);
+        }
+
+        .buy-btn:disabled {
+            opacity: .45;
+
+            cursor: not-allowed;
+
+            box-shadow: none;
+
+            filter: grayscale(.35);
+        }
+
+
+        /* =========================================================
+           GENERIC CONTAINERS
+        ========================================================= */
+
+        #ordersContainer,
+        #topupsList {
+            display: grid;
+
+            gap: 13px;
+        }
+
+        #ordersContainer > *,
+        #topupsList > * {
+            position: relative;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    140deg,
+                    rgba(17, 42, 70, .88),
+                    rgba(7, 18, 33, .94)
+                );
+
+            box-shadow:
+                0 13px 26px rgba(0,0,0,.17),
+                inset 0 1px rgba(255,255,255,.055);
+        }
+
+        #ordersContainer > *::before,
+        #topupsList > *::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 70px;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--cyan)
+                );
+
+            opacity: .8;
+        }
+
+        #ordersContainer button,
+        #topupsList button {
+            min-height: 44px;
+
+            border-radius: 12px;
+        }
+
+
+        /* =========================================================
+           LOADING
+        ========================================================= */
+
+        .loading-skeleton {
+            display: grid;
+
+            gap: 12px;
+
+            min-height: 145px;
+
+            padding: 19px;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-right:
+                3px solid
+                rgba(87,214,255,.7);
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    140deg,
+                    rgba(17, 42, 70, .88),
+                    rgba(7, 18, 33, .94)
+                );
+        }
+
+        .loading-skeleton span {
+            display: block;
+
+            height: 12px;
+
+            border-radius: 99px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(88,128,167,.10),
+                    rgba(104,215,255,.22),
+                    rgba(88,128,167,.10)
+                );
+
+            background-size: 200% 100%;
+
+            animation:
+                shimmer 1.5s linear infinite;
+        }
+
+        .loading-skeleton span:nth-child(1) {
+            width: 42%;
+        }
+
+        .loading-skeleton span:nth-child(2) {
+            width: 77%;
+        }
+
+        .loading-skeleton span:nth-child(3) {
+            width: 26%;
+            height: 34px;
+        }
+
+
+        /* =========================================================
+           ACCOUNT
+        ========================================================= */
+
+        .account-grid {
+            display: grid;
+
+            gap: 15px;
+        }
+
+        .account-card {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 20px;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: var(--radius);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16, 38, 65, .91),
+                    rgba(7, 17, 31, .92)
+                );
+
+            box-shadow:
+                0 18px 35px rgba(0,0,0,.17),
+                inset 0 1px rgba(255,255,255,.06);
+        }
+
+        .account-card::after {
+            content: "";
+
+            position: absolute;
+
+            top: -70px;
+            left: -55px;
+
+            width: 130px;
+            height: 130px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(33,126,255,.08);
+
+            filter: blur(10px);
+
+            pointer-events: none;
+        }
+
+        .account-card h3 {
+            position: relative;
+            z-index: 1;
+
+            display: flex;
+            align-items: center;
+
+            gap: 9px;
+
+            margin:
+                0
+                0
+                18px;
+
+            color: #fff;
+
+            font-size: 15px;
+            font-weight: 900;
+        }
+
+        .account-card h3 svg {
+            width: 19px;
+            height: 19px;
+
+            color: var(--cyan);
+        }
+
+        .details-list {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+
+            gap: 8px;
+        }
+
+        .details-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            min-height: 42px;
+
+            padding:
+                7px
+                10px;
+
+            border:
+                1px solid
+                rgba(139,205,255,.09);
+
+            border-radius: 12px;
+
+            background:
+                rgba(3, 12, 24, .3);
+        }
+
+        .details-row span {
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        .details-row strong {
+            max-width: 65%;
+
+            overflow: hidden;
+
+            color: #eff9ff;
+
+            font-size: 13px;
+            font-weight: 800;
+
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           TOPUP
+        ========================================================= */
+
+        .topup-form-layout {
+            position: relative;
+            z-index: 1;
+        }
+
+        .topup-types {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 10px;
+
+            margin-bottom: 13px;
+        }
+
+        .topup-type {
+            min-height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            padding: 9px;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 16px;
+
+            color: #b9c9d9;
+
+            background:
+                rgba(4, 15, 28, .46);
+
+            font-size: 13px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: .18s ease;
+        }
+
+        .topup-type img {
+            width: 30px;
+            height: 29px;
+
+            object-fit: contain;
+        }
+
+        .topup-type:hover {
+            border-color:
+                rgba(88,216,255,.52);
+        }
+
+        .topup-type.active,
+        .topup-type[aria-pressed="true"] {
+            color: #fff;
+
+            border-color:
+                rgba(245,200,110,.65);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(245,200,110,.19),
+                    rgba(39,105,196,.23)
+                );
+
+            box-shadow:
+                inset 0 0 0 1px
+                rgba(245,200,110,.12);
+        }
+
+        .amount-row {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    1fr
+                );
+
+            gap: 7px;
+
+            margin-bottom: 15px;
+        }
+
+        .amount-btn {
+            min-height: 43px;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 12px;
+
+            color: #bdcedd;
+
+            background:
+                rgba(4,15,28,.43);
+
+            font-size: 12px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: .15s ease;
+        }
+
+        .amount-btn:hover,
+        .amount-btn.active,
+        .amount-btn[aria-pressed="true"] {
+            color: #08111f;
+
+            border-color: #80e9ff;
+
+            background: #6bdcfb;
+
+            box-shadow:
+                0 6px 15px
+                rgba(48,186,255,.22);
+        }
+
+        .field-label {
+            display: block;
+
+            margin:
+                0
+                2px
+                8px;
+
+            color: #c7d9e7;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .topup-input {
+            width: 100%;
+            height: 53px;
+
+            padding:
+                0
+                14px;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 15px;
+
+            color: #fff;
+
+            direction: ltr;
+            text-align: right;
+
+            background:
+                rgba(3, 11, 22, .62);
+
+            transition: .18s ease;
+        }
+
+        .topup-input::placeholder {
+            color: #60768b;
+        }
+
+        .topup-input:focus {
+            border-color: var(--line-hot);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(45,180,255,.11);
+        }
+
+        .topup-hint {
+            margin:
+                9px
+                2px
+                15px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .primary-button,
+        .support-button {
+            width: 100%;
+
+            min-height: 51px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 8px;
+
+            border: 0;
+
+            border-radius: 15px;
+
+            color: #04101d;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78e7ff,
+                    #408bff
+                );
+
+            box-shadow:
+                0 13px 24px
+                rgba(30,119,255,.28);
+
+            font-size: 13px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition:
+                transform .16s ease,
+                filter .16s ease,
+                opacity .16s ease;
+        }
+
+        .primary-button svg,
+        .support-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .primary-button:hover,
+        .support-button:hover {
+            filter: brightness(1.1);
+        }
+
+        .primary-button:active,
+        .support-button:active {
+            transform:
+                translateY(1px)
+                scale(.985);
+        }
+
+        .primary-button:disabled,
+        .support-button:disabled {
+            opacity: .45;
+
+            cursor: not-allowed;
+
+            box-shadow: none;
+        }
+
+        .support-button {
+            margin-top: 13px;
+
+            color: #bceeff;
+
+            border:
+                1px solid
+                rgba(80,213,255,.32);
+
+            background:
+                rgba(35,151,214,.12);
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================================
+           HISTORY
+        ========================================================= */
+
+        .history-head {
+            position: relative;
+            z-index: 1;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .history-head h3 {
+            margin-bottom: 0;
+        }
+
+        .refresh-button {
+            min-height: 38px;
+
+            display: inline-flex;
+            align-items: center;
+
+            gap: 6px;
+
+            padding:
+                0
+                12px;
+
+            border:
+                1px solid
+                rgba(82,213,255,.27);
+
+            border-radius: 11px;
+
+            color: #a9eaff;
+
+            background:
+                rgba(36,148,214,.12);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+        .refresh-button svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        #topupsList {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 14px;
+        }
+
+
+        /* =========================================================
+           BOTTOM NAV
+        ========================================================= */
+
+        .bottom-nav {
+            position: fixed;
+            z-index: 30;
+
+            right: 50%;
+            bottom:
+                max(
+                    10px,
+                    env(safe-area-inset-bottom)
+                );
+
+            width:
+                min(
+                    620px,
+                    calc(100% - 24px)
+                );
+
+            padding: 7px;
+
+            transform:
+                translateX(50%);
+
+            border:
+                1px solid
+                rgba(115,210,255,.22);
+
+            border-radius: 23px;
+
+            background:
+                rgba(7, 19, 35, .78);
+
+            box-shadow:
+                0 18px 42px rgba(0,0,0,.37),
+                inset 0 1px rgba(255,255,255,.07);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-inner {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap: 5px;
+        }
+
+        .nav-item {
+            position: relative;
+
+            min-height: 54px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            gap: 3px;
+
+            border: 0;
+
+            border-radius: 16px;
+
+            color: #8297ad;
+
+            background: transparent;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: .18s ease;
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+
+            stroke-width: 2;
+        }
+
+        .nav-item.active,
+        .nav-item[aria-selected="true"] {
+            color: #dff8ff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(41,132,255,.42),
+                    rgba(39,215,255,.17)
+                );
+        }
+
+        .nav-item.active::after,
+        .nav-item[aria-selected="true"]::after {
+            content: "";
+
+            position: absolute;
+
+            top: 6px;
+
+            width: 22px;
+            height: 3px;
+
+            border-radius: 99px;
+
+            background: #71e5ff;
+
+            box-shadow:
+                0 0 10px
+                #71e5ff;
+        }
+
+        .nav-item:active {
+            transform: scale(.96);
+        }
+
+
+        /* =========================================================
+           MODAL
+        ========================================================= */
+
+        .modal {
+            position: fixed;
+            z-index: 60;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: flex-end;
+            justify-content: center;
+
+            padding:
+                16px
+                14px
+                max(
+                    15px,
+                    env(safe-area-inset-bottom)
+                );
+
+            background:
+                rgba(1, 6, 15, .72);
+
+            backdrop-filter: blur(13px);
+            -webkit-backdrop-filter: blur(13px);
+        }
+
+        .modal.show,
+        .modal.active {
+            display: flex;
+
+            animation:
+                overlay .2s ease both;
+        }
+
+        .modal-sheet {
+            width:
+                min(
+                    650px,
+                    100%
+                );
+
+            max-height:
+                calc(
+                    100dvh - 30px
+                );
+
+            overflow: auto;
+
+            padding:
+                11px
+                19px
+                19px;
+
+            border:
+                1px solid
+                rgba(102,214,255,.27);
+
+            border-radius:
+                29px
+                29px
+                13px
+                13px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #102d50,
+                    #071426 60%,
+                    #0b1830
+                );
+
+            box-shadow:
+                0 -19px 65px rgba(0,0,0,.52),
+                inset 0 1px rgba(255,255,255,.1);
+
+            animation:
+                sheet .28s ease both;
+        }
+
+        .drag-handle {
+            width: 43px;
+            height: 4px;
+
+            margin:
+                0
+                auto
+                15px;
+
+            border-radius: 99px;
+
+            background:
+                rgba(195,239,255,.42);
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .modal-head h2 {
+            margin: 0;
+
+            color: #edf7ff;
+
+            font-size: 19px;
+            font-weight: 900;
+        }
+
+        .icon-button {
+            width: 43px;
+            height: 43px;
+
+            display: grid;
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(132,210,255,.2);
+
+            border-radius: 14px;
+
+            color: #d5eff9;
+
+            background:
+                rgba(255,255,255,.055);
+
+            cursor: pointer;
+        }
+
+        .icon-button svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .buy-details {
+            display: grid;
+
+            grid-template-columns:
+                80px
+                minmax(0, 1fr);
+
+            gap: 14px;
+
+            align-items: center;
+
+            margin:
+                18px
+                0
+                14px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(123,211,255,.16);
+
+            border-radius: 19px;
+
+            background:
+                rgba(2, 12, 26, .42);
+        }
+
+        #buyProductImage {
+            width: 80px;
+            height: 80px;
+
+            border:
+                1px solid
+                rgba(103,217,255,.27);
+
+            border-radius: 17px;
+
+            object-fit: cover;
+
+            background:
+                #132b47;
+        }
+
+        #buyProductName {
+            margin:
+                0
+                0
+                5px;
+
+            color: #fff;
+
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        #buyProductDescription {
+            margin: 0;
+
+            color: #aebfd0;
+
+            font-size: 12px;
+
+            line-height: 1.75;
+        }
+
+        #buyProductPrice {
+            display: block;
+
+            margin-top: 8px;
+
+            color: var(--gold);
+
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        #balanceWarning {
+            margin:
+                0
+                0
+                14px;
+
+            padding: 12px;
+
+            border:
+                1px solid
+                rgba(255,135,150,.35);
+
+            border-radius: 14px;
+
+            color: #ffd1d7;
+
+            background:
+                rgba(181,48,71,.16);
+
+            font-size: 12px;
+
+            line-height: 1.75;
+        }
+
+        .modal-actions {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1.35fr;
+
+            gap: 9px;
+        }
+
+        .secondary-button {
+            min-height: 51px;
+
+            border:
+                1px solid
+                rgba(151,203,240,.2);
+
+            border-radius: 15px;
+
+            color: #d6e5f1;
+
+            background:
+                rgba(255,255,255,.055);
+
+            font-size: 13px;
+            font-weight: 900;
+
+            cursor: pointer;
+
+            transition: .16s ease;
+        }
+
+        .secondary-button:hover {
+            background:
+                rgba(255,255,255,.09);
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        #toastWrap {
+            position: fixed;
+            z-index: 80;
+
+            right: 16px;
+            left: 16px;
+
+            bottom:
+                calc(
+                    96px + var(--safe)
+                );
+
+            display: grid;
+
+            gap: 8px;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
+
+        @keyframes enter {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(11px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes overlay {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes sheet {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: -200% 0;
+            }
+        }
+
+
+        /* =========================================================
+           TABLET / DESKTOP
+        ========================================================= */
+
+        @media (min-width: 720px) {
+
+            .account-grid {
+                grid-template-columns:
+                    1fr
+                    1fr;
+            }
+
+            .topup-card,
+            .history-card {
+                grid-column: 1 / -1;
+            }
+
+            .topup-form-layout {
+                display: grid;
+
+                grid-template-columns:
+                    .88fr
+                    1.12fr;
+
+                gap: 21px;
+
+                align-items: end;
+            }
+
+            #productsContainer {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0, 1fr)
+                    );
+            }
+
+            #productsContainer > .product-card {
+                min-height: 236px;
+            }
+        }
+
+        @media (min-width: 980px) {
+
+            #productsContainer {
+                grid-template-columns:
+                    repeat(
+                        3,
+                        minmax(0, 1fr)
+                    );
+            }
+        }
+
+
+        /* =========================================================
+           SMALL PHONES
+        ========================================================= */
+
+        @media (max-width: 390px) {
+
+            .app-shell {
+                padding-right: 12px;
+                padding-left: 12px;
+            }
+
+            .brand-name {
+                font-size: 15px;
+            }
+
+            .balance-label {
+                display: none;
+            }
+
+            .balance-chip {
+                min-width: auto;
+            }
+
+            .hero {
+                min-height: 245px;
+
+                padding:
+                    24px
+                    19px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .amount-row {
+                gap: 5px;
+            }
+
+            .amount-btn {
+                font-size: 11px;
+            }
+
+            #productsContainer > .product-card {
+                min-height: 218px;
+            }
+
+            .product-body {
+                padding:
+                    9px
+                    10px
+                    9px;
+            }
+
+            .product-name {
+                font-size: 13px;
+            }
+
+            .buy-btn {
+                padding:
+                    0
+                    10px;
+
+                font-size: 9px;
+            }
+        }
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="app-shell">
+
+        <!-- =====================================================
+             HEADER
+        ====================================================== -->
+
+        <header class="topbar" aria-label="رأس المتجر">
+
+            <div class="brand-block">
+
+                <div class="brand-mark" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="m6 8 1.5-4h9L18 8"></path>
+                        <path d="M4 8h16l-1 12H5L4 8Z"></path>
+                        <path d="M9 12h6"></path>
+                    </svg>
+                </div>
+
+                <div class="brand-copy">
+
+                    <span class="brand-name">
+                        المتجر الليبي
+                    </span>
+
+                    <span class="store-status">
+                        <span
+                            class="status-dot"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>
+                            المتجر متاح الآن
+                        </span>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="balance-chip"
+                aria-label="رصيد المحفظة"
+            >
+
+                <span
+                    class="balance-icon"
+                    aria-hidden="true"
+                >
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M20 7V6a2 2 0 0 0-2-2H5a3 3 0 0 0 0 6h15v8a2 2 0 0 1-2 2H5a3 3 0 0 1-3-3V7"></path>
+                        <path d="M16 14h.01"></path>
+                    </svg>
+                </span>
+
+                <div>
+
+                    <span class="balance-label">
+                        رصيد المحفظة
+                    </span>
+
+                    <strong id="balanceValue">
+                        0 د.ل
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             MAIN
+        ====================================================== -->
+
+        <main>
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section
+                class="hero"
+                aria-labelledby="heroTitle"
+            >
+
+                <span class="eyebrow">
+                    خدمات رقمية موثوقة
+                </span>
+
+                <h1 id="heroTitle">
+                    كل خدماتك الرقمية، في مكان واحد
+                </h1>
+
+                <p>
+                    تسوّق بثقة، ادفع من رصيد محفظتك،
+                    واستلم طلباتك بسرعة وسهولة.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 STORE
+            ================================================== -->
+
+            <section
+                id="viewStore"
+                class="view active"
+                aria-labelledby="storeHeading"
+            >
+
+                <div class="section-heading">
+
+                    <h2 id="storeHeading">
+                        استكشف الخدمات
+                    </h2>
+
+                    <span id="productCount">
+                        0 خدمة
+                    </span>
+
+                </div>
+
+
+                <div class="search-wrap">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+
+                    <label
+                        for="productSearch"
+                        class="sr-only"
+                    >
+                        البحث عن خدمة
+                    </label>
+
+                    <input
+                        id="productSearch"
+                        class="search-input"
+                        type="search"
+                        autocomplete="off"
+                        placeholder="ابحث عن خدمة..."
+                        aria-label="البحث عن خدمة"
+                    >
+
+                </div>
+
+
+                <nav
+                    class="filter-row"
+                    aria-label="تصنيفات الخدمات"
+                >
+
+                    <button
+                        type="button"
+                        class="filter-btn active"
+                        data-category="all"
+                        aria-pressed="true"
+                    >
+                        الكل
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-category="social"
+                        aria-pressed="false"
+                    >
+                        السوشيال ميديا
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-category="games"
+                        aria-pressed="false"
+                    >
+                        الألعاب
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-category="subscriptions"
+                        aria-pressed="false"
+                    >
+                        الاشتراكات
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-category="other"
+                        aria-pressed="false"
+                    >
+                        أخرى
+                    </button>
+
+                </nav>
+
+
+                <!--
+                    مهم جداً:
+                    لا توجد منتجات ثابتة هنا.
+                    app.js يقوم بتحميل المنتجات من /api/products
+                    ثم يبني البطاقات داخل هذا العنصر.
+                -->
+
+                <div
+                    id="productsContainer"
+                    aria-live="polite"
+                >
+
+                    <div
+                        class="loading-skeleton"
+                        aria-label="جارٍ تحميل الخدمات"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div
+                        class="loading-skeleton"
+                        aria-hidden="true"
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ORDERS
+            ================================================== -->
+
+            <section
+                id="viewOrders"
+                class="view"
+                aria-labelledby="ordersHeading"
+            >
+
+                <div class="section-heading">
+
+                    <h2 id="ordersHeading">
+                        طلباتي
+                    </h2>
+
+                    <span>
+                        تابع حالة طلباتك
+                    </span>
+
+                </div>
+
+
+                <div class="search-wrap">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+
+                    <label
+                        for="orderSearch"
+                        class="sr-only"
+                    >
+                        البحث في الطلبات
+                    </label>
+
+                    <input
+                        id="orderSearch"
+                        class="search-input"
+                        type="search"
+                        autocomplete="off"
+                        placeholder="ابحث في طلباتك..."
+                        aria-label="البحث في الطلبات"
+                    >
+
+                </div>
+
+
+                <div
+                    id="ordersContainer"
+                    aria-live="polite"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SETTINGS / ACCOUNT
+            ================================================== -->
+
+            <section
+                id="viewSettings"
+                class="view"
+                aria-labelledby="settingsHeading"
+            >
+
+                <div class="section-heading">
+
+                    <h2 id="settingsHeading">
+                        الحساب والمحفظة
+                    </h2>
+
+                    <span>
+                        إدارة حسابك وشحن رصيدك
+                    </span>
+
+                </div>
+
+
+                <div class="account-grid">
+
+                    <!-- PROFILE -->
+
+                    <article
+                        class="account-card"
+                        aria-labelledby="profileHeading"
+                    >
+
+                        <h3 id="profileHeading">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M20 21a8 8 0 0 0-16 0"></path>
+                                <circle
+                                    cx="12"
+                                    cy="7"
+                                    r="4"
+                                ></circle>
+                            </svg>
+
+                            معلومات الحساب
+
+                        </h3>
+
+
+                        <div class="details-list">
+
+                            <div class="details-row">
+                                <span>الاسم</span>
+                                <strong id="settingsName">
+                                    —
+                                </strong>
+                            </div>
+
+                            <div class="details-row">
+                                <span>اسم المستخدم</span>
+                                <strong id="settingsUsername">
+                                    —
+                                </strong>
+                            </div>
+
+                            <div class="details-row">
+                                <span>معرّف تيليجرام</span>
+                                <strong id="settingsTelegramId">
+                                    —
+                                </strong>
+                            </div>
+
+                            <div class="details-row">
+                                <span>رصيد المحفظة</span>
+                                <strong id="settingsBalance">
+                                    0 د.ل
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- TOPUP -->
+
+                    <article
+                        class="account-card topup-card"
+                        aria-labelledby="topupHeading"
+                    >
+
+                        <h3 id="topupHeading">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                ></circle>
+                                <path d="M8 12h8"></path>
+                                <path d="M12 8v8"></path>
+                            </svg>
+
+                            شحن المحفظة
+
+                        </h3>
+
+
+                        <div class="topup-form-layout">
+
+                            <div>
+
+                                <div
+                                    class="topup-types"
+                                    role="group"
+                                    aria-label="اختيار شبكة الشحن"
+                                >
+
+                                    <button
+                                        type="button"
+                                        class="topup-type active"
+                                        data-topup-type="libyana"
+                                        aria-pressed="true"
+                                    >
+
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Libyana_logo.svg/320px-Libyana_logo.svg.png"
+                                            alt=""
+                                            loading="lazy"
+                                            onerror="this.style.display='none'"
+                                        >
+
+                                        ليبيانا
+
+                                    </button>
+
+
+                                    <button
+                                        type="button"
+                                        class="topup-type"
+                                        data-topup-type="madar"
+                                        aria-pressed="false"
+                                    >
+
+                                        <img
+                                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Madar_logo.png/320px-Madar_logo.png"
+                                            alt=""
+                                            loading="lazy"
+                                            onerror="this.style.display='none'"
+                                        >
+
+                                        مدار
+
+                                    </button>
+
+                                </div>
+
+
+                                <div
+                                    class="amount-row"
+                                    role="group"
+                                    aria-label="اختيار مبلغ الشحن"
+                                >
+
+                                    <button
+                                        type="button"
+                                        class="amount-btn"
+                                        data-topup-amount="5"
+                                        aria-pressed="false"
+                                    >
+                                        5 د.ل
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="amount-btn"
+                                        data-topup-amount="10"
+                                        aria-pressed="false"
+                                    >
+                                        10 د.ل
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="amount-btn"
+                                        data-topup-amount="20"
+                                        aria-pressed="false"
+                                    >
+                                        20 د.ل
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="amount-btn"
+                                        data-topup-amount="50"
+                                        aria-pressed="false"
+                                    >
+                                        50 د.ل
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <div>
+
+                                <label
+                                    class="field-label"
+                                    for="topupCodeInput"
+                                >
+                                    كود الشحن
+                                </label>
+
+                                <input
+                                    id="topupCodeInput"
+                                    class="topup-input"
+                                    type="text"
+                                    inputmode="text"
+                                    autocomplete="off"
+                                    placeholder="أدخل كود الشحن"
+                                >
+
+                                <p class="topup-hint">
+                                    اختر الشبكة والمبلغ، ثم أدخل
+                                    كود الشحن كما هو ظاهر في البطاقة.
+                                </p>
+
+
+                                <button
+                                    id="submitTopupBtn"
+                                    type="button"
+                                    class="primary-button"
+                                >
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        aria-hidden="true"
+                                    >
+                                        <circle
+                                            cx="12"
+                                            cy="12"
+                                            r="10"
+                                        ></circle>
+                                        <path d="M12 8v8"></path>
+                                        <path d="M8 12h8"></path>
+                                    </svg>
+
+                                    <span>
+                                        إرسال طلب الشحن
+                                    </span>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- TOPUP HISTORY -->
+
+                    <article
+                        class="account-card history-card"
+                        aria-labelledby="topupsHeading"
+                    >
+
+                        <div class="history-head">
+
+                            <h3 id="topupsHeading">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M4 4h16v16H4z"></path>
+                                    <path d="M8 8h8"></path>
+                                    <path d="M8 12h8"></path>
+                                    <path d="M8 16h5"></path>
+                                </svg>
+
+                                سجل الشحن
+
+                            </h3>
+
+
+                            <button
+                                id="refreshTopupsBtn"
+                                type="button"
+                                class="refresh-button"
+                                aria-label="تحديث سجل الشحن"
+                            >
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
+                                    <path d="M20 11a8.1 8.1 0 0 0-14.7-4.7L4 8"></path>
+                                    <path d="M4 4v4h4"></path>
+                                    <path d="M4 13a8.1 8.1 0 0 0 14.7 4.7L20 16"></path>
+                                    <path d="M20 20v-4h-4"></path>
+                                </svg>
+
+                                تحديث
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="topupsList"
+                            aria-live="polite"
+                        ></div>
+
+
+                        <button
+                            id="supportBtn"
+                            type="button"
+                            class="support-button"
+                        >
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 8.7 8.7 0 0 1-4-.9L3 20l1.3-4.3A8.4 8.4 0 0 1 3 11.5a8.4 8.4 0 0 1 9-8.5 8.4 8.4 0 0 1 9 8.5Z"></path>
+                                <path d="M8 11h.01"></path>
+                                <path d="M12 11h.01"></path>
+                                <path d="M16 11h.01"></path>
+                            </svg>
+
+                            <span>
+                                تواصل مع الدعم
+                            </span>
+
+                        </button>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================================================
+         BOTTOM NAVIGATION
+    ========================================================== -->
+
+    <nav
+        class="bottom-nav"
+        aria-label="التنقل الرئيسي"
+    >
+
+        <div class="nav-inner">
+
+            <button
+                type="button"
+                class="nav-item active"
+                data-tab="store"
+                aria-selected="true"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M3 10h18"></path>
+                    <path d="m5 10 1-5h12l1 5"></path>
+                    <path d="M4 10v9h16v-9"></path>
+                    <path d="M9 19v-5h6v5"></path>
+                </svg>
+
+                <span>
+                    المتجر
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-tab="orders"
+                aria-selected="false"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <path d="M4 4h16v16H4z"></path>
+                    <path d="M8 9h8"></path>
+                    <path d="M8 13h5"></path>
+                    <path d="m15 17 2 2 4-4"></path>
+                </svg>
+
+                <span>
+                    طلباتي
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="nav-item"
+                data-tab="settings"
+                aria-selected="false"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                >
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="4"
+                    ></circle>
+                    <path d="M4 21a8 8 0 0 1 16 0"></path>
+                </svg>
+
+                <span>
+                    الحساب
+                </span>
+
+            </button>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================================
+         BUY MODAL
+    ========================================================== -->
+
+    <div
+        id="buyModal"
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="buyProductName"
+        aria-hidden="true"
+    >
+
+        <div class="modal-sheet">
+
+            <div
+                class="drag-handle"
+                aria-hidden="true"
+            ></div>
+
+
+            <div class="modal-head">
+
+                <h2>
+                    تأكيد الشراء
+                </h2>
+
+                <button
+                    id="closeBuyModal"
+                    type="button"
+                    class="icon-button"
+                    aria-label="إغلاق نافذة الشراء"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <div class="buy-details">
+
+                <img
+                    id="buyProductImage"
+                    loading="lazy"
+                    alt=""
+                >
+
+                <div>
+
+                    <h3 id="buyProductName">
+                        —
+                    </h3>
+
+                    <p id="buyProductDescription">
+                        —
+                    </p>
+
+                    <strong id="buyProductPrice">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <p
+                id="balanceWarning"
+                hidden
+            >
+                رصيدك الحالي غير كافٍ لإتمام هذا الطلب.
+                يرجى شحن المحفظة ثم المحاولة مرة أخرى.
+            </p>
+
+
+            <div class="modal-actions">
+
+                <button
+                    id="cancelBuyBtn"
+                    type="button"
+                    class="secondary-button"
+                >
+                    إلغاء
+                </button>
+
+                <button
+                    id="confirmBuyBtn"
+                    type="button"
+                    class="primary-button"
+                >
+                    تأكيد الشراء
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         TOAST
+    ========================================================== -->
+
+    <div
+        id="toastWrap"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+
+    <!-- =========================================================
+         NETWORK LOGOS
+         app.js يمكنه استخدامها إذا كانت موجودة.
+    ========================================================== -->
+
+    <script>
+        window.NETWORK_LOGOS = {
+            libyana:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Libyana_logo.svg/320px-Libyana_logo.svg.png",
+
+            madar:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Madar_logo.png/320px-Madar_logo.png"
+        };
+    </script>
+
+
+    <!-- =========================================================
+         APP JS
+    ========================================================== -->
+
+    <script src="/app.js?v=18"></script>
+
+
+    <!-- =========================================================
+         VISUAL HELPERS ONLY
+         لا يوجد هنا منطق شراء أو API أو منتجات.
+    ========================================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /*
+             * بعض نسخ app.js تعتمد على lucide.
+             * لذلك نحافظ على الواجهة بدون الاعتماد عليه.
+             */
+
+            const modal =
+                document.getElementById("buyModal");
+
+            if (!modal) return;
+
+
+            /*
+             * حماية بسيطة للـ modal فقط.
+             * لا نتدخل في منطق app.js.
+             */
+
+            const closeButton =
+                document.getElementById("closeBuyModal");
+
+            const cancelButton =
+                document.getElementById("cancelBuyBtn");
+
+
+            function closeVisualModal() {
+
+                modal.classList.remove(
+                    "show",
+                    "active"
+                );
+
+                modal.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                document.body.classList.remove(
+                    "modal-open"
+                );
+            }
+
+
+            if (closeButton) {
+                closeButton.addEventListener(
+                    "click",
+                    function () {
+                        closeVisualModal();
+                    }
+                );
+            }
+
+
+            if (cancelButton) {
+                cancelButton.addEventListener(
+                    "click",
+                    function () {
+                        closeVisualModal();
+                    }
+                );
+            }
+
+
+            modal.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target === modal
+                    ) {
+                        closeVisualModal();
+                    }
+
+                }
+            );
+
+
+            /*
+             * مزامنة بسيطة لحالة الـ modal
+             * بدون التأثير على app.js.
+             */
+
+            const observer =
+                new MutationObserver(
+                    function () {
+
+                        const opened =
+                            modal.classList.contains(
+                                "show"
+                            ) ||
+                            modal.classList.contains(
+                                "active"
+                            );
+
+                        document.body.classList.toggle(
+                            "modal-open",
+                            opened
+                        );
+
+                    }
+                );
+
+
+            observer.observe(
+                modal,
+                {
+                    attributes: true,
+                    attributeFilter: [
+                        "class",
+                        "aria-hidden"
+                    ]
+                }
+            );
+
+        });
+    </script>
+
+</body>
+
+</html>
